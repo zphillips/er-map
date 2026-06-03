@@ -7,7 +7,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --host localhost",
     "build": "webpack --mode production",
-    "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src"
+    "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "mapbox-gl": "2.1.1",
@@ -21,6 +22,7 @@
     "@neutrinojs/dev-server": "^9.5.0",
     "@neutrinojs/react": "^9.5.0",
     "@neutrinojs/standardjs": "^9.5.0",
+    "@playwright/test": "^1.60.0",
     "eslint": "^7",
     "neutrino": "^9.5.0",
     "webpack": "^4",

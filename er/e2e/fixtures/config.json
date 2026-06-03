@@ -1,0 +1,22 @@
+{
+  "server": "mock.local",
+  "public_name": "test",
+  "map_title": "Test Tracker",
+  "color_scheme": ["#DB2222", "#219DB8", "#E69E39"],
+  "map": {
+    "center": [0, 0],
+    "zoom": 2,
+    "pitch": 0,
+    "show_subject_names": true,
+    "map_icon_size": 30
+  },
+  "subjects": {
+    "sub-1": {
+      "name": "Zola",
+      "age": "5 years",
+      "fun_fact": "Zola loves acacia leaves.",
+      "pictures": [{ "path": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" }],
+      "detail_description": "<p>Zola is a <b>test</b> giraffe.</p>"
+    }
+  }
+}

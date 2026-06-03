@@ -1,0 +1,36 @@
+{
+  "data": {
+    "data": [
+      {
+        "id": "sub-1",
+        "name": "Zola",
+        "common_name": null,
+        "subject_subtype": "giraffe",
+        "sex": "female",
+        "last_position": {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [0.01, 0.01] },
+          "properties": {
+            "DateTime": "2026-06-01T08:30:00",
+            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+          }
+        }
+      },
+      {
+        "id": "sub-2",
+        "name": "Mara",
+        "common_name": null,
+        "subject_subtype": "giraffe",
+        "sex": "female",
+        "last_position": {
+          "type": "Feature",
+          "geometry": { "type": "Point", "coordinates": [-0.02, 0.015] },
+          "properties": {
+            "DateTime": "2026-06-01T09:15:00",
+            "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+          }
+        }
+      }
+    ]
+  }
+}

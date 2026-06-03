@@ -39,6 +39,12 @@ build/Release
 
 # Dependency directories
 node_modules/
+
+# Playwright (regression net)
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
