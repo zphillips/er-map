@@ -125,7 +125,7 @@ Goal: latest runtime + map + a regression net + visibility + safe deploy, so lat
 | PR | Title | What | Exit check |
 | --- | --- | --- | --- |
 | 1.1 | Regression net | Playwright + journeys (D.1) against current app; network mocked via route interception | Suite green on current `develop` |
-| 1.2 | Vite + TS tooling | Add Vite 8, `tsconfig` (`allowJs`), Vitest, RTL, ESLint/Prettier; app still JS, runs on Vite; remove `react-hot-loader` (→ Fast Refresh) | App boots on Vite; net green |
+| 1.2 | Vite + TS tooling | Add Vite 8, `tsconfig` (`allowJs`), Vitest, RTL, ESLint/Prettier; app still JS, runs on Vite; remove `react-hot-loader` (→ Fast Refresh); **remove the OpenSSL-legacy workaround from `er/playwright.config.ts`** (grep `REMOVE-AFTER-VITE`) | App boots on Vite; net green; no `--openssl-legacy-provider` remains |
 | 1.3 | React 19 upgrade | 16 → 19 (`createRoot`, etc.); fix deprecations | Net green |
 | 1.4 | MapLibre swap | mapbox-gl → maplibre-gl 5; replace token/style with config-driven style (Decision G.1) | Net green; map renders |
 | 1.5 | Observability | Add Sentry (errors + Web Vitals + source maps); remove dead `react-ga`/UA | Test crash visible in Sentry |
