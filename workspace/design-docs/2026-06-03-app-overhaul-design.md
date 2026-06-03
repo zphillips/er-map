@@ -66,7 +66,7 @@ Failure characteristics:
 
 ## B. Target State
 
-- **Runtime:** React 19, Vite 8, Node 22, TypeScript 5 (strict).
+- **Runtime:** React 19, Vite 8, Node 22, TypeScript 5 (strict). **npm** (drop yarn).
 - **Map:** MapLibre GL v5 (BSD-3, no token/billing). Style sourced explicitly (see Decision G.1).
 - **Architecture:** no globals; map instance + config provided via React context; typed API
   layer; god-component split into feature modules (see B.1).
@@ -79,30 +79,40 @@ Failure characteristics:
 ### B.1 Target module layout
 
 ```
-er/src/
-  main.tsx                  # entry (was index.jsx)
-  App.tsx                   # composition root only
-  config/
-    schema.ts               # typed Config + runtime validation (zod)
-    ConfigProvider.tsx      # replaces module-level `let config`
-  map/
-    MapProvider.tsx         # owns the MapLibre instance (replaces window.GlobalMap)
-    useMap.ts
-    layers.ts               # typed addSubjectLayer / addTrackLayer
-    icons.ts                # imgElFromSrc + sizing (pure, unit-tested)
-  api/
-    client.ts               # fetch wrapper
-    subjects.ts / tracks.ts # typed fetchers
-    types.ts                # Subject, Track, Position
-  features/
-    legend/                 # Legend, Animal
-    popup/                  # Popup, SubjectPopupContent
-    tips/                   # HelpButton
-    controls/               # TrackButton, LocButton, reset/hotkeys
-  components/ui/            # primitives (Button, IconButton, Panel…) — Pass 3
-  theme/                    # tokens + Tailwind bridge — Pass 3
-  hooks/                    # useSubjects, useTracks, useHotkeys
+er/
+  e2e/                      # Playwright e2e (separate runner, real browser)
+    journeys.spec.ts
+    fixtures/               # mocked config + ER API responses
+  src/
+    main.tsx                # entry (was index.jsx)
+    App.tsx                 # composition root only
+    config/
+      schema.ts             # typed Config + runtime validation (zod)
+      ConfigProvider.tsx    # replaces module-level `let config`
+    map/
+      MapProvider.tsx       # owns the MapLibre instance (replaces window.GlobalMap)
+      MapProvider.test.tsx  # unit tests co-located next to source
+      useMap.ts
+      layers.ts             # typed addSubjectLayer / addTrackLayer
+      icons.ts              # imgElFromSrc + sizing (pure, unit-tested)
+      icons.test.ts
+    api/
+      client.ts             # fetch wrapper
+      subjects.ts / tracks.ts # typed fetchers
+      types.ts              # Subject, Track, Position
+    features/
+      legend/               # Legend, Animal (+ *.test.tsx beside each)
+      popup/                # Popup, SubjectPopupContent, format.ts (+ format.test.ts)
+      tips/                 # HelpButton
+      controls/             # TrackButton, LocButton, reset/hotkeys
+    components/ui/          # primitives (Button, IconButton, Panel…) — Pass 3
+    theme/                  # tokens + Tailwind bridge — Pass 3
+    hooks/                  # useSubjects, useTracks, useHotkeys
 ```
+
+**Test layout convention:** Playwright e2e lives in top-level `er/e2e/` (its own runner). Vitest
+unit tests are **co-located** next to source as `<name>.test.ts(x)` — tests sit beside the code
+they cover.
 
 ---
 
@@ -125,7 +135,7 @@ Goal: latest runtime + map + a regression net + visibility + safe deploy, so lat
 | PR | Title | What | Exit check |
 | --- | --- | --- | --- |
 | 1.1 | Regression net | Playwright + journeys (D.1) against current app; network mocked via route interception | Suite green on current `develop` |
-| 1.2 | Vite + TS tooling | Add Vite 8, `tsconfig` (`allowJs`), Vitest, RTL, ESLint/Prettier; app still JS, runs on Vite; remove `react-hot-loader` (→ Fast Refresh); **remove the OpenSSL-legacy workaround from `er/playwright.config.ts`** (grep `REMOVE-AFTER-VITE`) | App boots on Vite; net green; no `--openssl-legacy-provider` remains |
+| 1.2 | Vite + TS tooling | Add Vite 8, `tsconfig` (`allowJs`), Vitest, RTL, ESLint/Prettier; **switch yarn → npm** (`yarn.lock` → `package-lock.json`); app still JS, runs on Vite; remove `react-hot-loader` (→ Fast Refresh); **remove the OpenSSL-legacy workaround from `er/playwright.config.ts`** (grep `REMOVE-AFTER-VITE`) | App boots on Vite; net green; no `--openssl-legacy-provider` remains |
 | 1.3 | React 19 upgrade | 16 → 19 (`createRoot`, etc.); fix deprecations | Net green |
 | 1.4 | MapLibre swap | mapbox-gl → maplibre-gl 5; replace token/style with config-driven style (Decision G.1) | Net green; map renders |
 | 1.5 | Observability | Add Sentry (errors + Web Vitals + source maps); remove dead `react-ga`/UA | Test crash visible in Sentry |
@@ -182,8 +192,8 @@ assignment, name truncation (`Animal.jsx`).
 - **(Stretch)** PR preview deploys to `s3://…/preview/<branch>/` for review before merge.
 
 ### E.3 Pipeline changes summary
-- Bump CircleCI image Node 14 → 22.
-- `yarn build` now Vite (output `dist/`, not `build/`); update S3 source paths.
+- Bump CircleCI image Node 14 → 22; switch `yarn` commands to `npm ci` / `npm run`.
+- `npm run build` now Vite (output `dist/`, not `build/`); update S3 source paths.
 - Add `test` job (Vitest + Playwright) as a required upstream of the deploy job.
 - Add release-versioning + smoke-test steps.
 
