@@ -17,6 +17,13 @@ teach me", or when I clearly hit something I don't know. Then go deep:
 
 When unsure which mode, stay terse and offer: "want the deep version?"
 
+## Coding standards (read before any code change)
+
+Before making **any** code change in `er/`, read `workspace/standards/coding-standards.md` and
+follow it. In brief: plan-first for non-trivial changes; a behavioral change ships with a
+table-driven test; small atomic commits with conventional messages; end with a short diff
+summary + rationale. Standards apply to new/modified code — don't force-migrate untouched legacy.
+
 ## Contributing upstream (to PADAS)
 
 - **Start** a change with the `starting-upstream-work` skill — it branches off
