@@ -25,12 +25,17 @@ Last updated 2026-06-03.
 ### Summary
 <what changed and why — 1–3 sentences>
 
-### Tests — how do we know it's safe?
-Used *(check all)*: ☐ unit ☐ integration ☐ contract ☐ synthetic/e2e ☐ manual ☐ **none**
-- **If `none`:** <why that's acceptable — required>
-- **Manual steps** *(if manual checked)*: <exact replayable steps>
+### Tests — how do we know it's safe? *(check all used)*
+- [ ] Unit
+- [ ] Integration
+- [ ] Contract
+- [ ] Synthetic / e2e
+- [ ] Manual
+- [ ] None
+- **If `None` is checked:** <why that's acceptable — required>
+- **Manual steps** *(if Manual checked)*: <exact replayable steps>
 
-### Detection — if this breaks in prod, how will we know?
+### Incident detection — if this breaks in prod, how will we know?
 <the alert / Sentry issue / log / dashboard that fires — or `gap: no signal` if true>
 
 ### Rollback & mitigation — if it goes wrong, how do we fix it fast?
@@ -48,8 +53,8 @@ Used *(check all)*: ☐ unit ☐ integration ☐ contract ☐ synthetic/e2e ☐ 
 - Trade-offs accepted:
 - What could go wrong:
 
-## Impact analysis  *(S1–S2 or user-facing; else `N/A`)*
-- Can we measure blast radius with current observability? <what we can see / gaps>
+## Incident impact analysis  *(S1–S2 or user-facing; else `N/A`)*
+- If this causes an incident, can we measure blast radius with current observability? <what we can see / gaps>
 
 ## Conditional  *(include only if relevant)*
 - **Breaking changes / backward-compat:** <consumers affected + migration path | N/A>
