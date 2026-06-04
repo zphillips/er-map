@@ -24,16 +24,20 @@ follow it. In brief: plan-first for non-trivial changes; a behavioral change shi
 table-driven test; small atomic commits with conventional messages; end with a short diff
 summary + rationale. Standards apply to new/modified code — don't force-migrate untouched legacy.
 
-## Contributing upstream (to PADAS)
+## Opening pull requests
 
-- **Start** a change with the `starting-upstream-work` skill — it branches off
-  `upstream/develop` (never the fork's `develop`).
-- **Ship** it with the `opening-upstream-prs` skill — always fill out its PR template.
-- **PRs must be incremental.** One logical, self-contained change per PR. Before opening,
-  check the diff is a single incremental unit; if it mixes unrelated changes, split it into
-  separate PRs.
-- PRs always target `PADAS/er-map` `develop` from a fork branch (`zphillips:<branch>`).
-  Never push to `upstream` directly (it's disabled).
+**Every PR — fork-internal or upstream — fills the canonical template at
+`workspace/standards/pr-template.md`**, scaled to the change (core sections always; conditional
+sections `N/A` when irrelevant — keep it sharp, never padded).
+
+- **Upstream to PADAS:** `starting-upstream-work` (branch off `upstream/develop`) →
+  `opening-upstream-prs` (fills template, PRs to `PADAS/er-map`).
+- **Fork-internal (into your own `develop`):** branch off `develop` → `opening-fork-prs`
+  (fills template, PRs into `zphillips/er-map`).
+- **PRs must be incremental** — one logical, self-contained change per PR; split if it mixes
+  unrelated changes.
+- Upstream PRs target `PADAS/er-map develop` from a fork branch (`zphillips:<branch>`); never
+  push to `upstream` directly (it's disabled).
 
 ## Fork-only content
 

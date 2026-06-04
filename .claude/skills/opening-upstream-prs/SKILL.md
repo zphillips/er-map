@@ -21,35 +21,26 @@ description: Pushes the current feature branch to the user's fork (origin) and o
    git push -u origin <current-branch>
    ```
 
-2. **Inspect the change** to fill the template; ask only for what can't be inferred (issue number, breaking-change flag):
+2. **Inspect the change**; ask only for what can't be inferred (issue link, severity):
    ```bash
    git log upstream/develop..HEAD --oneline
    git diff upstream/develop...HEAD --stat
    ```
-   If unrelated personal files (`workspace/`, `.claude/`) appear in that diff, warn the user — the branch was cut from the wrong base.
+   If personal files (`workspace/`, `.claude/`) appear in that diff, warn the user — the branch was cut from the wrong base.
 
-3. **Verify the change is incremental.** A PR must be one logical, self-contained change. If the diff spans multiple unrelated changes, stop and suggest splitting into separate PRs before continuing. Renumber the remaining steps accordingly.
+3. **Verify the change is incremental.** A PR must be one logical, self-contained change. If the diff spans multiple unrelated changes, stop and suggest splitting into separate PRs.
 
-3. **Fill this template** (adjust wording to the actual change):
-   ```markdown
-   ## Summary
-   <1-3 sentences: what this does and why>
-
-   ## Changes
-   - <bullet per meaningful change>
-
-   ## Testing
-   <commands run / manual steps / "not yet tested">
-
-   ## Related
-   <linked issue or PR, or "none">
+4. **Fill the canonical PR template.** Read it from the fork's `develop` (it won't be in a clean upstream branch's working tree):
+   ```bash
+   git show develop:workspace/standards/pr-template.md
    ```
+   Fill it **scaled to the change** per its filling rules (core always; conditional sections `N/A` when irrelevant — don't pad). Infer what you can from the diff; ask the user only for what you can't.
 
-4. **Open the PR to upstream:**
+5. **Open the PR to upstream:**
    ```bash
    gh pr create --repo PADAS/er-map --base develop \
      --head zphillips:<current-branch> \
-     --title "<concise title>" --body "<filled template>"
+     --title "<type>: <concise title>" --body "<filled template>"
    ```
 
-5. **Report the PR URL** that `gh` returns.
+6. **Report the PR URL** that `gh` returns.
