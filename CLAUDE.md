@@ -26,8 +26,9 @@ summary + rationale. Standards apply to new/modified code — don't force-migrat
 
 ## Opening pull requests
 
-**Every PR — fork-internal or upstream — fills the canonical template at
-`workspace/standards/pr-template.md`**, scaled to the change (core sections always; conditional
+**Every PR fills the PR template.** The form is `.github/pull_request_template.md` — GitHub
+auto-loads it on fork-internal PRs; for PRs to PADAS the skill fills it. Fill it scaled to the
+change per the playbook `workspace/standards/pr-template.md` (core sections always; conditional
 sections `N/A` when irrelevant — keep it sharp, never padded).
 
 - **Upstream to PADAS:** `starting-upstream-work` (branch off `upstream/develop`) →

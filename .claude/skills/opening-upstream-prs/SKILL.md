@@ -30,11 +30,11 @@ description: Pushes the current feature branch to the user's fork (origin) and o
 
 3. **Verify the change is incremental.** A PR must be one logical, self-contained change. If the diff spans multiple unrelated changes, stop and suggest splitting into separate PRs.
 
-4. **Fill the canonical PR template.** Read it from the fork's `develop` (it won't be in a clean upstream branch's working tree):
+4. **Fill the PR template.** PADAS has no template, so fill it yourself. Read the form from the fork's `develop` (it won't be in a clean upstream branch's working tree):
    ```bash
-   git show develop:workspace/standards/pr-template.md
+   git show develop:.github/pull_request_template.md
    ```
-   Fill it **scaled to the change** per its filling rules (core always; conditional sections `N/A` when irrelevant — don't pad). Infer what you can from the diff; ask the user only for what you can't.
+   Fill it **scaled to the change** per the playbook (`git show develop:workspace/standards/pr-template.md`): core always; conditional sections `N/A` when irrelevant — don't pad. Infer from the diff; ask the user only for what you can't.
 
 5. **Open the PR to upstream:**
    ```bash

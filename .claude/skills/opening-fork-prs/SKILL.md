@@ -33,9 +33,10 @@ stay in the fork.
 3. **Verify the change is incremental** — one logical, self-contained change. If it spans
    unrelated changes, suggest splitting into separate PRs.
 
-4. **Fill the canonical PR template** at `workspace/standards/pr-template.md`, **scaled to the
-   change** per its filling rules (core always; conditional sections `N/A` when irrelevant).
-   Infer from the diff; ask the user only for what you can't.
+4. **Fill the PR template.** GitHub auto-loads `.github/pull_request_template.md` into the PR
+   body (base = the fork), so in the web UI it's already there. Fill it **scaled to the change**
+   per the playbook `workspace/standards/pr-template.md` (core always; conditional sections `N/A`
+   when irrelevant). Infer from the diff; ask the user only for what you can't.
 
 5. **Open the PR into the fork:**
    ```bash

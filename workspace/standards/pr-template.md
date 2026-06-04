@@ -1,69 +1,41 @@
-# PR Template (living doc)
+# PR Playbook (living doc)
 
-Single source of truth for PR descriptions. The PR skills fill this; refine it over time.
-Last updated 2026-06-03.
+How to fill the PR template. The **live form GitHub auto-loads on every PR** is
+[`.github/pull_request_template.md`](../../.github/pull_request_template.md) — edit *that* to change
+the form; edit *this* to change the guidance. (They're not duplicates: the form is the fields,
+this is the how-to.) Last updated 2026-06-03.
+
+## Why the form lives in `.github/`
+
+GitHub injects `.github/pull_request_template.md` into the description box server-side on every
+new PR — reliable, no query params, no length limit. (URL `?body=` prefill is unreliable and was
+abandoned.) It auto-applies to PRs whose **base** is this repo, i.e. **fork-internal PRs**. PRs to
+PADAS use PADAS's template (none), so the PR skill fills the form there instead.
 
 ## Filling rules — keep it sharp, not cumbersome
 
 - **Scale to the change.** Trivial PR → one line per core section. Risky PR → full detail.
-- **Core sections are always filled.** Conditional sections: include only when relevant;
-  otherwise write `N/A — <reason>` or omit. Don't pad.
-- Prefer bullets over prose. A reviewer should grasp the PR in ~30 seconds.
-- The four questions that must always be answerable: **what changed**, **how we know it's
-  safe**, **how we'd detect breakage**, **how we roll back / mitigate**.
+- **Core sections** (Change type → Links) are always filled. **Conditional** sections (Decisions,
+  Incident impact, Breaking/Security/Migrations): include only when relevant; otherwise
+  `N/A — <reason>` or delete. Don't pad.
+- Prefer bullets. A reviewer should grasp the PR in ~30 seconds.
+- Always answerable: **what changed**, **how we know it's safe**, **how we'd detect breakage**,
+  **how we roll back / mitigate**.
 
----
+## Change type
+🆕 net-new behavior (`feat`) · 🔄 behavior change (`feat`/`fix`) · ♻️ same behavior (`refactor`/`docs`/`test`/`chore`)
 
-## Title
-`<type>: <concise summary>`  — `<type>` matches the change type below (conventional commit).
+## Risk severity — blast radius IF THIS GOES WRONG (not change size)
 
-## Core (always)
+- **S1 Critical:** outage / data-loss / security breach; ~all users
+- **S2 High:** core feature broken; many users; no workaround
+- **S3 Moderate:** degraded; workaround exists; few users
+- **S4 Low:** cosmetic / internal / no user impact
 
-**Change type** *(one)*: 🆕 net-new behavior · 🔄 behavior change · ♻️ same behavior (refactor/docs/test/chore)
-**Risk severity** *(blast radius if this goes wrong, one)*: **S1** critical (outage/data-loss/security, ~all users) · **S2** high (core feature broken, many users, no workaround) · **S3** moderate (degraded, workaround exists, few users) · **S4** low (cosmetic/internal/no user impact)
+## Section guidance
 
-### Summary
-<what changed and why — 1–3 sentences>
-
-### Tests — how do we know it's safe? *(check all used)*
-- [ ] Unit
-- [ ] Integration
-- [ ] Contract
-- [ ] Synthetic / e2e
-- [ ] Manual
-- [ ] None
-- **If `None` is checked:** <why that's acceptable — required>
-- **Manual steps** *(if Manual checked)*: <exact replayable steps>
-
-### Incident detection — if this breaks in prod, how will we know?
-<the alert / Sentry issue / log / dashboard that fires — or `gap: no signal` if true>
-
-### Rollback & mitigation — if it goes wrong, how do we fix it fast?
-- Safe to plain-revert? <yes/no + why>
-- Rollout: direct / phased / behind a flag
-- If revert isn't enough: <mitigation steps>
-
-### Links
-- Design doc / two-pager: <link — typically the fork's `workspace/design-docs/…`>
-- Issues / related PRs / dashboards: <links or N/A>
-
-## Decisions & alternatives  *(non-trivial / architectural changes; else `N/A`)*
-- Approach chosen & why:
-- Alternatives considered & why rejected:
-- Trade-offs accepted:
-- What could go wrong:
-
-## Incident impact analysis  *(S1–S2 or user-facing; else `N/A`)*
-- If this causes an incident, can we measure blast radius with current observability? <what we can see / gaps>
-
-## Conditional  *(include only if relevant)*
-- **Breaking changes / backward-compat:** <consumers affected + migration path | N/A>
-- **Security & privacy:** <secrets / authz / PII / new attack surface | N/A>
-- **Migrations:** <schema or data change + reversible? | N/A>
-
-## Self-review checklist
-- [ ] Lint + tests green
-- [ ] Docs updated (if behavior changed)
-- [ ] No debug / dead / commented-out code
-- [ ] Conventional-commit title
-- [ ] No personal/workspace files in the diff (upstream PRs)
+- **Tests:** check every type used; if **None**, a justification is required.
+- **Incident detection:** name the concrete signal (alert / Sentry / log / dashboard) — or admit the gap.
+- **Incident impact analysis:** fill for S1–S2 or user-facing; can we measure blast radius?
+- **Conditional (breaking / security / migrations):** delete the ones that don't apply.
+- **Self-review checklist:** all boxes should be tickable before you open the PR.
