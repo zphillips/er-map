@@ -15,9 +15,8 @@ PADAS use PADAS's template (none), so the PR skill fills the form there instead.
 ## Filling rules — keep it sharp, not cumbersome
 
 - **Scale to the change.** Trivial PR → one line per core section. Risky PR → full detail.
-- **Core sections** (Change type → Links) are always filled. **Conditional** sections (Decisions,
-  Incident impact, Breaking/Security/Migrations): include only when relevant; otherwise
-  `N/A — <reason>` or delete. Don't pad.
+- Fill every section, but scale it: a trivial PR gets one line each; a risky one expands. If a
+  section truly doesn't apply, write `N/A — <reason>` rather than padding.
 - Prefer bullets. A reviewer should grasp the PR in ~30 seconds.
 - Always answerable: **what changed**, **how we know it's safe**, **how we'd detect breakage**,
   **how we roll back / mitigate**.
@@ -32,10 +31,14 @@ PADAS use PADAS's template (none), so the PR skill fills the form there instead.
 - **S3 Moderate:** degraded; workaround exists; few users
 - **S4 Low:** cosmetic / internal / no user impact
 
-## Section guidance
+## Section order & guidance
 
+Order: **Change type / Severity (table) → Summary → Decisions & alternatives → Links → Tests →
+Incident detection → Incident impact analysis → Rollback & mitigation.**
+
+- **Summary:** one line — what changed and why.
+- **Decisions & alternatives:** the approach, what you rejected and why, trade-offs.
 - **Tests:** check every type used; if **None**, a justification is required.
 - **Incident detection:** name the concrete signal (alert / Sentry / log / dashboard) — or admit the gap.
-- **Incident impact analysis:** fill for S1–S2 or user-facing; can we measure blast radius?
-- **Conditional (breaking / security / migrations):** delete the ones that don't apply.
-- **Self-review checklist:** all boxes should be tickable before you open the PR.
+- **Incident impact analysis:** can current observability measure the blast radius?
+- **Rollback & mitigation:** is a plain revert safe; how we fix it fast if not.
