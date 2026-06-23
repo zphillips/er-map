@@ -25,6 +25,26 @@ jobs:
           paths: "/index.html"
           distribution_id: $SANDBOX_DISTRIBUTION_ID
 
+  e2e:
+    # Playwright regression net (PR 1.1). Runs the suite against the real app on
+    # every branch / PR so breakage surfaces automatically instead of relying on
+    # someone remembering to run `yarn test:e2e` locally.
+    docker:
+      # Node 20 + the system libs a browser needs, preinstalled. (The deploy job
+      # above stays on Node 14 — Playwright needs >=18, so this job rents a newer
+      # image; the two jobs never share a machine.)
+      - image: cimg/node:20-browsers
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: cd er && yarn install --frozen-lockfile
+      - run:
+          name: Run Playwright e2e suite
+          # `pretest:e2e` installs the Chromium binary; the dev server is booted
+          # by playwright.config.ts (webServer), so no separate `yarn start`.
+          command: cd er && yarn test:e2e
+
 workflows:
   build_deploy:
     jobs:
@@ -34,3 +54,5 @@ workflows:
               branches:
                 only:
                   - develop
+      # No branch filter: the regression net should run on every PR / branch.
+      - e2e
