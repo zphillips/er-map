@@ -8,6 +8,7 @@
     "start": "webpack-dev-server --mode development --open --host localhost",
     "build": "webpack --mode production",
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src",
+    "pretest:e2e": "playwright install chromium",
     "test:e2e": "playwright test"
   },
   "dependencies": {

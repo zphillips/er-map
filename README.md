@@ -16,6 +16,7 @@
     - [Install dependencies](#install-dependencies)
     - [Build](#build)
     - [Run locally](#run-locally)
+    - [End-to-end tests](#end-to-end-tests)
   - [Maintainers](#maintainers)
 
 ## Introduction
@@ -141,5 +142,11 @@ yarn build
 ~~~
 yarn start
 ~~~
+### End-to-end tests
+Playwright drives the real app in a headless browser as a regression net. From the `er` directory:
+~~~
+yarn test:e2e
+~~~
+The `pretest:e2e` hook installs the Chromium browser automatically on first run, and Playwright boots its own dev server, so no separate `yarn start` is needed.
 ## Maintainers
 Manasi Shah, Zage Strassberg-Phillips, Lauren Vreeken, Chris Jones

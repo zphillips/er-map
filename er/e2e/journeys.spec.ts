@@ -1,7 +1,7 @@
 import { test, expect, Page } from '@playwright/test';
-import config from './fixtures/config.json' assert { type: 'json' };
-import subjects from './fixtures/subjects.json' assert { type: 'json' };
-import tracks from './fixtures/tracks.json' assert { type: 'json' };
+import config from './fixtures/config.json' with { type: 'json' };
+import subjects from './fixtures/subjects.json' with { type: 'json' };
+import tracks from './fixtures/tracks.json' with { type: 'json' };
 
 // Regression net for the CURRENT app (PR 1.1). These journeys assert behavior through
 // the UI, so they survive the Vite/React 19/MapLibre overhaul. All network is mocked so
